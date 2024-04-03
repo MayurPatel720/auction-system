@@ -1,0 +1,214 @@
+* {
+  color: #2f2f2f;
+}
+.welcome_container {
+  width: 100%;
+  height: calc(100vh - 57px);
+  /* background-color: #dadada; */
+  /* border: 1px solid #000; */
+  padding: 10px;
+}
+.welcome__container {
+  height: 100vh;
+}
+
+#loader h1 {
+  color: #fff;
+}
+
+.ad {
+  display: flex;
+  gap: 25px;
+}
+
+.avade span {
+  font-size: 30px;
+  color: #fff;
+  display: inline-block;
+}
+
+#loader {
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  background-color: rgb(0, 0, 0);
+  color: #ff0000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+.container_textandimg {
+  width: 90%;
+  height: 60%;
+  position: relative;
+  top: 70px;
+  left: 50%;
+  display: flex;
+  transform: translate(-50%);
+}
+
+.mainn {
+  height: 100%;
+  display: flex;
+}
+.first_text {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  align-items: flex-start;
+}
+.second_text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.first_text,
+.second_text {
+  padding: 10px;
+  width: 50%;
+  /* border: 1px solid #ff0000; */
+  height: 100%;
+}
+
+.pehlu h1 {
+  font-size: 3.5vw;
+
+  min-width: 90px;
+  line-height: 3.5vw;
+}
+.biju {
+  margin-top: 15vh;
+  margin-bottom: 3vh;
+}
+.biju p {
+  font-size: 1vw;
+  min-width: 100px;
+  /* line-height: 4vw; */
+}
+
+.explore {
+  border: 2px solid #89d9d0;
+  background-color: transparent;
+  color: #89d9d0;
+  padding: 7px 20px;
+  font-size: 1.2vw;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.explore:hover {
+  background-color: #89d9d0;
+  color: #fff;
+}
+.explore:active {
+  background-color: #2b9689;
+  color: #fff;
+}
+.usernameprint {
+  color: #2b9689;
+  text-transform: capitalize;
+}
+
+.d {
+  margin-top: 90px;
+  margin-left: 70px;
+  font-size: 1.8vw;
+}
+
+.popolar{
+   /* border: 1px solid #ff0000; */
+   padding: 10px 90px; 
+}
+
+.popular_first{
+   display: flex;                            
+   align-items: center;
+   justify-content: space-between;
+}
+.popular_second{
+   margin-top: 50px;
+   display: flex;
+   /* border: 1px solid #000;  */
+}
+
+.choktha_first{
+   width: 150px;
+   height: 150px;
+   /* border: 1px solid #000; */
+}
+
+.choktha_first img{
+   object-fit: cover;
+   width: 150px;
+   height: 150px;
+   /* border: 1px solid #000; */
+}
+
+.choktha{
+   /* border: 1px solid #0011ff; */
+   margin-right: 25px;
+}
+
+.chok{
+   margin-top: 5px;
+   font-weight: bolder;
+}
+
+
+
+@media (max-width: 768px) {
+  #loader {
+    font-size: 21px;
+  }
+  .container_textandimg {
+    position: relative;
+    top: 0;
+    width: 100vw;
+    /* border: 1px solid #000; */
+  }
+  .second_text {
+    width: 0;
+    height: 0;
+  }
+  .first_text {
+    /* border: 1px solid #000; */
+    width: 100%;
+  }
+  .as {
+    display: none;
+  }
+  .pehlu h1 {
+    font-size: 6vw;
+    min-width: 90px;
+    line-height: 7vw;
+  }
+  .biju {
+    /* line-height:15px; */
+    min-width: 90px;
+    margin-top: 25px;
+    /* font-size: 15vw; */
+  }
+  .biju p {
+    line-height: 10px;
+    min-width: 90px;
+    font-size: 10px;
+  }
+  .explore {
+    border: 2px solid #89d9d0;
+    background-color: transparent;
+    color: #89d9d0;
+    padding: 7px 20px;
+    font-size: 2.5vw;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+}

@@ -1,5 +1,4 @@
-<?php
-session_start();
+<?php session_start();
 if(isset($_POST["user"]) && isset($_POST["pass"])) {
     
     include 'partial/_dbconnect.php';
@@ -13,6 +12,7 @@ if(isset($_POST["user"]) && isset($_POST["pass"])) {
     if($nums == 1){
         $login = true;
         $_SESSION['loggedin'] = true;
+        $_SESSION['email'] = $email;
         $_SESSION['username'] = $username;
         header("Location: welcome.php");
         exit();
@@ -22,13 +22,15 @@ if(isset($_POST["user"]) && isset($_POST["pass"])) {
 }
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="./CSS/loogin.css">
+    <link rel="stylesheet" href="./CSS/loogin.css?v=<?php echo time(); ?>">
 </head>
 <script>
     function ma(){
@@ -60,7 +62,7 @@ if(isset($_POST["user"]) && isset($_POST["pass"])) {
             </div>
             <div class="set">
                 <p>Remember me</p>
-                <p>Forgot password</p>
+                <a href="forgetpassword.php"><p>Forgot password</p></a>
             </div>
         </div>
     </div>
