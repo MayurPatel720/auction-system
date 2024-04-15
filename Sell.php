@@ -1,17 +1,38 @@
 <?php
-    // session_start();
     if(isset($_POST["name"]) && isset($_POST["description"]) && isset($_POST["category"])) {
         
         include 'partial/_dbconnect.php';
         $name = $_POST["name"];
         $description = $_POST["description"];
         $st_bid_price = $_POST["bid_price"];
-        $category = $_POST["category"]; // Retrieve selected category
-        
-        $sql = "INSERT INTO `products` (`name`, `description`, `st_bid_price`, `category`) VALUES ('$name', '$description', '$st_bid_price', '$category')"; // Modify SQL query to include category field
-        $result = mysqli_query($conn, $sql);
-    }
+        $category = $_POST["category"]; 
 
+       
+        $targetDir = "./images"; // Directory where uploaded files will be saved
+        $fileName = basename($_FILES["fileToUpload"]["name"]);
+        $targetFilePath = $targetDir . $fileName;
+        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+
+        // Check if file is selected
+        if(!empty($fileName)){
+            // Allow certain file formats
+            $allowTypes = array('jpg','png','jpeg','gif','pdf');
+            if(in_array($fileType, $allowTypes)){
+                // Upload file to server
+                if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFilePath)){
+                    // Insert file details into the database
+                    $sql = "INSERT INTO `products` (`name`, `description`, `st_bid_price`, `category`, `file_name`) VALUES ('$name', '$description', '$st_bid_price', '$category', '$fileName')";
+                    $result = mysqli_query($conn, $sql);
+                }else{
+                    echo "Sorry, there was an error uploading your file.";
+                }
+            }else{
+                echo "Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.";
+            }
+        }else{
+            echo "Please select a file to upload.";
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +40,7 @@
     <link rel="shortcut icon" href="./logo.png" type="image/x-icon" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
+    <title>Sell</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,6 +69,9 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
+        input[type="file"] {
+            margin-bottom: 12px;
+        }
         input[type="submit"] {
             background-color: #007bff;
             color: #fff;
@@ -63,8 +87,9 @@
     </style>
 </head>
 <body>
+  
     <?php include "./partial/nav.php" ?>
-    <form action="Sell.php" method="post">
+    <form action="Sell.php" method="post" enctype="multipart/form-data">
         <label for="name">Name</label>
         <input type="text" name="name">
         <br>
@@ -73,13 +98,17 @@
         <br>
         <label for="bid_price">Bid Price</label>
         <input type="text" name="bid_price">
-        <label for="category">Category</label> <!-- Added label for category -->
-        <select name="category"> <!-- Added name attribute -->
-            <option value="Furniture">Furniture</option> <!-- Added value attribute -->
+        <label for="category">Category</label>
+        <select name="category">
+            <option value="Furniture">Furniture</option>
             <option value="Books">Books</option>
             <option value="Car">Car</option>
             <option value="Paa">Paa</option>
         </select>
+        <br>
+        <label for="fileToUpload">Select file to upload</label>
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <br>
         <input type="submit" value="Submit">
     </form>
 </body>

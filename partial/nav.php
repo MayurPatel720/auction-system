@@ -181,7 +181,7 @@
       </div>
       <div class="second">
         <ul class="nav-list">
-          <li class="nav-item"><a href="#" class="nav-link">Auctions</a></li>
+          <li class="nav-item"><a href="welcome.php" class="nav-link">Auctions</a></li>
           <li class="nav-item">
             <a href="Categories.php" class="nav-link">Categories</a>
           </li>
