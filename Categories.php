@@ -8,13 +8,14 @@ $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
    
     echo '<table>';
-    echo '<tr><th>ID</th><th>Name</th><th>Description</th><th>Start Bid Price</th></tr>';
+    echo '<tr><th>ID</th><th>Name</th><th>Description</th><th>category</th><th>Start Bid Price</th></tr>';
     
     while ($row = mysqli_fetch_assoc($result)) {
         echo '<tr>';
         echo '<td>' . $row['id'] . '</td>';
         echo '<td>' . $row['name'] . '</td>';
         echo '<td>' . $row['description'] . '</td>';
+        echo '<td>' . $row['category'] . '</td>';
 
         echo '<td>' . $row['st_bid_price']  . '</td>';
         echo '</tr>';

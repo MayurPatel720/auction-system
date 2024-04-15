@@ -6,11 +6,28 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     header("location: loogin.php"); 
     exit;
 } 
-?>
+include 'partial/_dbconnect.php';
+$sql = "SELECT image_url, description, title FROM imagesadminpanel";
+$result = mysqli_query($conn, $sql);
+$imageData = array();
+
+$sql2 = "SELECT `title`, `date`, `link`, `image_url` FROM `upcoming_auction`";
+$result2 = mysqli_query($conn,$sql2);
+$upcoming = array();
+
+
+if ($result->num_rows > 0) { while ($row = $result->fetch_assoc()) {
+$imageData[] = $row; } } if ($result2->num_rows > 0) { while ($row =
+$result2->fetch_assoc()) { $upcoming[] = $row; } } ?>
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
       rel="stylesheet"
@@ -47,40 +64,52 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     <?php require 'partial\nav.php'?>
 
     <div class="welcome_container">
-      <div class="container_textandimg">
-        <div class="mainn">
-          <div class="first_text">
-            <div class="pehlu">
-              <h1>
-                Find A Comfortable<br />
-                Product <span class="usernameprint"><?php echo $a ?></span>
-              </h1>
+      <div class="main_1">
+        <div
+          class="swiper-container"
+          style="width: 100vw; overflow: hidden; height: 100%"
+        >
+          <div class="swiper-wrapper" style="width: 100%; height: 100%">
+            <?php foreach ($imageData as $image): ?>
+            <div class="swiper-slide" style="width: 100%; height: 100%">
+              <div class="lakhelu">
+                <h2
+                  style="
+                    font-size: 30px;
+                    margin-top: 25px;
+                    color: #fff;
+                    margin-left: 25px;
+                  "
+                >
+                  <?php echo $image['title']; ?>
+                </h2>
+                <p
+                  style="
+                    font-size: 14px;
+                    margin-top: 25px;
+                    margin-bottom: 20px;
+                    color: #fff;
+                    margin-left: 25px;
+                    margin-right: 25px;
+                  "
+                >
+                  <?php echo $image['description']; ?>
+                </p>
+                <a class="explore" href="Categories.php">EXPLORE NOW</a>
+              </div>
+              <img
+                class="carimage"
+                src="<?php echo $image['image_url']; ?>"
+                alt="car"
+              />
             </div>
-            <div class="biju">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
-                officia aspernatur expedita cupiditate fuga, ea sint iste nemo
-                esse aliquam ut. Ab assumenda neque beatae, maiores vitae quam.
-                Reprehenderit, nostrum!
-              </p>
-            </div>
-            <div class="triju"></div>
-            <button class="explore">EXPLORE NOW</button>
+            <?php endforeach; ?>
           </div>
-          <div class="second_text">
-            <img
-              class="as"
-              style="width: 37vw; height: auto; position: relative; top: -30px"
-              src="./a.png"
-              alt="img"
-              srcset=""
-            />
-          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
         </div>
       </div>
-      <!-- <div class="ff">
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit, voluptatem accusamus rem a veritatis, saepe temporibus eos voluptates, culpa molestias dolor? Natus quam consequatur iure obcaecati, accusantium nemo molestiae distinctio illum illo minima laudantium deserunt, nisi odit doloremque in dicta.</p>
-      </div> -->
     </div>
 
     <div class="welcome__container">
@@ -179,16 +208,142 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
               <center><p class="chok">Vegetables</p></center>
             </div>
           </div>
+          <div class="choktha">
+            <div class="choktha_first">
+              <img
+                src="https://img.freepik.com/premium-photo/top-view-fruits-vegetables_1057389-20588.jpg?w=740"
+                alt="laptop"
+                srcset=""
+              />
+            </div>
+            <div class="choktha_second">
+              <center><p class="chok">Vegetables</p></center>
+            </div>
+          </div>
+          <div class="choktha">
+            <div class="choktha_first">
+              <img
+                src="https://img.freepik.com/premium-photo/top-view-fruits-vegetables_1057389-20588.jpg?w=740"
+                alt="laptop"
+                srcset=""
+              />
+            </div>
+            <div class="choktha_second">
+              <center><p class="chok">Vegetables</p></center>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="todaybest">
+        <div class="todayfirst">
+          <h2>Today Our Best Product</h2>
+          <!-- <a href="#"><h4>view all</h4></a> -->
+        </div>
+        <div class="todaysecond">
+          <div class="todaysecond-first">
+            <div class="ona">
+              <h3>Women's Collection</h3>
+            </div>
+            <img src="./images/womenscoll.jpg" alt="" />
+          </div>
+          <div class="todaysecond-second">
+            <div class="second-1">
+              <div class="onna">
+                <h4>HeadPhones</h4>
+              </div>
+              <img
+                src="https://img.freepik.com/free-photo/beautiful-woman-enjoying-song-headphones-close-eyes-smile-while-listening-music-headphones-holding-smartphone-hand-standing-blue-background_1258-70094.jpg?w=996&t=st=1712317052~exp=1712317652~hmac=b5a7c51e6eb1d88219d6bc091956f096a80216fa10a0f31248599f6b5d94b05c"
+                alt=""
+              />
+            </div>
+            <div class="second-1">
+              <div class="onna">
+                <h4>Sports</h4>
+              </div>
+              <img src="./images/sports.jpg" alt="" />
+              <!-- <img src="https://img.freepik.com/premium-photo/international-sports-day-6-april_10221-18936.jpg?w=996" alt=""/> -->
+            </div>
+            <div class="second-1">
+              <div class="onna">
+                <h4>Beauty Products</h4>
+              </div>
+              <img
+                src="https://img.freepik.com/premium-photo/eco-friendly-cosmetics-decorated-with-green-leaves-ai-generated_866663-2043.jpg?w=1060"
+                alt=""
+              />
+            </div>
+            <div class="second-1">
+              <div class="onna">
+                <h4>Shoes</h4>
+              </div>
+              <img
+                src="https://sneakerbardetroit.com/wp-content/uploads/2020/02/Nike-Air-Max-Plus-Gumball.jpg"
+                alt=""
+                srcset=""
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div
-      class="welcome__container"
-      style="background-color: antiquewhite"
-    ></div>
-    <div class="welcome__container" style="background-color: black"></div>
-
+    <div class="welcome__container">
+      <div class="rect">
+        <img
+          src="https://img.freepik.com/premium-vector/new-arrival-sneakers-collection-social-media-banner-template-design_596383-159.jpg?w=1380"
+          alt=""
+          srcset=""
+        />
+      </div>
+      <div class="upcoming">
+        <div class="popular_first">
+          <h2>Upcoming Auctions</h2>
+          <a href="#"><h4>view all</h4></a>
+        </div>
+        <!-- <div class="upcoming_second">  
+          <div class="choktha">
+            <div style="width: 250px;height: 250px;" class="choktha_first">
+              <img style="width: 250px;height: 250px;" src="./images/bags.jpg" alt="bags" srcset="" />
+            </div>
+            <div class="upcominglakelu">
+             <h2 class="lala">Important Watch</h2>
+             <p style="margin-top: 6px;margin-bottom: 25px;">07-04-2024</p>
+              <button class="bidbutton">BID</button>
+            </div>
+          </div>
+        </div> -->
+        <div class="upcoming_second">
+          <?php
+    
+          foreach ($upcoming as $auction) {
+          ?>
+          <div class="choktha">
+            <div style="width: 250px; height: 250px" class="choktha_first">
+              <img
+                style="width: 250px; height: 250px"
+                src="<?php echo $auction['image_url']; ?>"
+                alt="<?php echo $auction['title']; ?>"
+                srcset=""
+              />
+            </div>
+            <div class="upcominglakelu">
+              <h2 class="lala"><?php echo $auction['title']; ?></h2>
+              <p style="margin-top: 6px; margin-bottom: 25px">
+                <?php echo $auction['date']; ?>
+              </p>
+              <a href="<?php echo $auction['link']; ?>" class="bidbutton"
+                >BID</a
+              >
+            </div>
+          </div>
+          <?php
+           }
+          ?>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="welcome__container" style="background-color: #dadada"></div> -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
       integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
@@ -201,7 +356,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
     <script src="./CSS/welcome.js?v=<?php echo time(); ?>"></script>
   </body>
 </html>

@@ -1,6 +1,5 @@
 var t1 = gsap.timeline();
 
-
 t1.from("#loader h1", {
   x: 40,
   opacity: 0,
@@ -29,4 +28,19 @@ t1.to(
 
 t1.set("#loader", {
   display: "none",
+});
+
+var swiper = new Swiper(".swiper-container", {
+  loop: true,
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: ".swiper-pagination",
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
 });
